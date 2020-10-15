@@ -1,0 +1,15 @@
+nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  background-color: transparent;
+  z-index: 9999;
+}
+
+.hide {
+  top: -50%;
+}
+/*# sourceMappingURL=NavBar.component.css.map */

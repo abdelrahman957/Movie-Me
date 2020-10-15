@@ -1,0 +1,157 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  height: 10000px;
+}
+
+* {
+  font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+header {
+  height: 85vh;
+  background: url(../../assets/images/background_header.jpg) no-repeat center center;
+  background-size: cover;
+  background-blend-mode: overlay;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-bottom: 10px solid #333;
+}
+
+header::before, header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20vh;
+  background: -webkit-gradient(linear, left top, left bottom, from(black), to(transparent));
+  background: linear-gradient(to bottom, black, transparent 100%);
+}
+
+header::after {
+  bottom: 0;
+  background: -webkit-gradient(linear, left bottom, left top, from(black), to(transparent));
+  background: linear-gradient(to top, black, transparent 100%);
+  top: auto;
+}
+
+header .header_content {
+  color: #fff;
+  text-align: center;
+}
+
+header .header_content h2 {
+  width: 70%;
+  margin: auto;
+  font-size: 4vw;
+  font-weight: bold;
+}
+
+header .header_content p:first-of-type {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+header .header_content p {
+  margin-bottom: 0;
+  font-size: 20px;
+}
+
+header .header_content .header_form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+header .header_content .header_form input {
+  width: 500px;
+  outline: none;
+  padding: 10px;
+  border: none;
+  border-radius: 2px;
+  margin-right: -2px;
+}
+
+header .header_content .header_form button {
+  border: none;
+  background-color: #B60002;
+  color: #fff;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+header .header_content .header_form button:hover {
+  background-color: #E80000;
+}
+
+@media screen and (max-width: 576px) {
+  header::before, header::after {
+    height: 10vh;
+  }
+  header .header_content h2 {
+    width: 100%;
+    font-size: 7vw;
+  }
+  header .header_content .header_form {
+    display: block;
+  }
+  header .header_content .header_form input {
+    width: 90%;
+  }
+  header .header_content .header_form div {
+    width: 200px;
+    margin: auto;
+  }
+  header .header_content .header_form div button {
+    font-size: 20px;
+  }
+}
+
+@media screen and (min-width: 577px) and (max-width: 768px) {
+  header .header_content h2 {
+    width: 100%;
+    font-size: 7vw;
+  }
+  header .header_content .header_form {
+    display: block;
+  }
+  header .header_content .header_form div {
+    width: 200px;
+    margin: auto;
+  }
+  header .header_content .header_form div button {
+    font-size: 20px;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 992px) {
+  header .header_content .header_form {
+    display: block;
+  }
+  header .header_content .header_form div {
+    width: 260px;
+    margin: auto;
+  }
+  header .header_content .header_form div button {
+    font-size: 20px;
+  }
+}
+/*# sourceMappingURL=home.component.css.map */

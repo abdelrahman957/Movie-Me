@@ -1,0 +1,430 @@
+<div class="container-fluid py-5">
+    <section class="head col-xl-5 col-lg-6 col-md-9 py-5">
+        <h3>Movies</h3>
+        <p>Movies move us like nothing else can, whether they’re scary, funny, dramatic, romantic or anywhere
+            in-between. So many titles, so much to experience.<a href="#">Watch now for free</a></p>
+    </section>
+    <section class="all_movies">
+        <!--childrens category-->
+        <div class="category p-3">
+            <h4>Children & Family Movies</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor= "rgba(23, 23, 23, 0.8)" size = "medium" color = "#E80000" type = "ball-climbing-dot" [fullScreen] = "false"
+                 name="children">
+                    <p style="color: white" > Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev"  [style.display]="childrenStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext" [style.display]="childrenStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="childrenOptions" class="text-white" #owlChildren (initialized)="getLengthOfSlide($event)">
+                    <ng-template carouselSlide *ngFor="let movie of childrenMovies">
+                        <a routerLink="/movieDetails/movie/{{movie.id}}">
+                            <img [src]="movie.poster_path? movieImgPath + movie.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{movie.title}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{movie.vote_average}}
+                                    <i [ngClass]="movie.vote_average>5?'fas fa-star-half-alt':'far fa-star'" class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlChildren.prev()" (click)="childrenPrev()" [style.display]="childrenStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlChildren.next()" (click)="putChildrenDataOnVeiw()" 
+                [style.display]="childrenStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Horror category-->
+        <div class="category p-3">
+            <h4>Horror Movies</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor= "rgba(23, 23, 23, 0.8)" size = "medium" color = "#E80000" type = "ball-climbing-dot" [fullScreen] = "false" 
+                name="horror">
+                    <p style="color: white" > Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev"  [style.display]="horrorStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext" [style.display]="horrorStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="horrorOptions" class="text-white" #owlHorror>
+                    <ng-template carouselSlide *ngFor="let movie of horrorMovies">
+                        <a routerLink="/movieDetails/movie/{{movie.id}}">
+                            <img [src]="movie.poster_path? movieImgPath + movie.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{movie.title}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{movie.vote_average}}
+                                    <i [ngClass]="movie.vote_average>5?'fas fa-star-half-alt':'far fa-star'" class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlHorror.prev()" (click)="horrorPrev()" [style.display]="horrorStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlHorror.next()" (click)="putHorrorDataOnVeiw()" 
+                [style.display]="horrorStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Romantic category-->
+        <div class="category p-3">
+            <h4>Romantic Movies</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor= "rgba(23, 23, 23, 0.8)" size = "medium" color = "#E80000" type = "ball-climbing-dot" [fullScreen] = "false" 
+                name="romantic">
+                    <p style="color: white" > Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev"  [style.display]="romanticStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext" [style.display]="romanticStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="romanticOptions" class="text-white" #owlRomantic>
+                    <ng-template carouselSlide *ngFor="let movie of romanticMovies">
+                        <a routerLink="/movieDetails/movie/{{movie.id}}">
+                            <img [src]="movie.poster_path? movieImgPath + movie.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{movie.title}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{movie.vote_average}}
+                                    <i [ngClass]="movie.vote_average>5?'fas fa-star-half-alt':'far fa-star'" class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlRomantic.prev()" (click)="romanticPrev()" [style.display]="romanticStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlRomantic.next()" (click)="putRomanticDataOnVeiw()" 
+                [style.display]="romanticStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Popular category-->
+        <div class="category p-3">
+            <h4>Popular On Movie Me</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor= "rgba(23, 23, 23, 0.8)" size = "medium" color = "#E80000" type = "ball-climbing-dot" [fullScreen] = "false" 
+                name="popular">
+                    <p style="color: white" > Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev"  [style.display]="popularStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext" [style.display]="popularStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="popularOptions" class="text-white" #owlPopular>
+                    <ng-template carouselSlide *ngFor="let movie of popularMovies">
+                        <a routerLink="/movieDetails/movie/{{movie.id}}">
+                            <img [src]="movie.poster_path? movieImgPath + movie.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{movie.title}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{movie.vote_average}}
+                                    <i [ngClass]="movie.vote_average>5?'fas fa-star-half-alt':'far fa-star'" class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlPopular.prev()" (click)="popularPrev()" [style.display]="popularStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlPopular.next()" (click)="putPopularDataOnVeiw()" 
+                [style.display]="popularStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Comedies category-->
+        <div class="category p-3">
+            <h4>Comedies</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor= "rgba(23, 23, 23, 0.8)" size = "medium" color = "#E80000" type = "ball-climbing-dot" [fullScreen] = "false" 
+                name="comedies">
+                    <p style="color: white" > Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev"  [style.display]="comediesStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext" [style.display]="comediesStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="comediesOptions" class="text-white" #owlComedies>
+                    <ng-template carouselSlide *ngFor="let movie of comediesMovies">
+                        <a routerLink="/movieDetails/movie/{{movie.id}}">
+                            <img [src]="movie.poster_path? movieImgPath + movie.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{movie.title}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{movie.vote_average}}
+                                    <i [ngClass]="movie.vote_average>5?'fas fa-star-half-alt':'far fa-star'" class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlComedies.prev()" (click)="comediesPrev()" [style.display]="comediesStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlComedies.next()" (click)="putComediesDataOnVeiw()" 
+                [style.display]="comediesStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Fantasy category-->
+        <div class="category p-3">
+            <h4>Sci-Fi & Fantasy</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor= "rgba(23, 23, 23, 0.8)" size = "medium" color = "#E80000" type = "ball-climbing-dot" [fullScreen] = "false" 
+                name="fantasy">
+                    <p style="color: white" > Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev"  [style.display]="fantasyStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext" [style.display]="fantasyStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="fantasyOptions" class="text-white" #owlFantasy>
+                    <ng-template carouselSlide *ngFor="let movie of fantasyMovies">
+                        <a routerLink="/movieDetails/movie/{{movie.id}}">
+                            <img [src]="movie.poster_path? movieImgPath + movie.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{movie.title}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{movie.vote_average}}
+                                    <i [ngClass]="movie.vote_average>5?'fas fa-star-half-alt':'far fa-star'" class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlFantasy.prev()" (click)="fantasyPrev()" [style.display]="fantasyStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlFantasy.next()" (click)="putFantasyDataOnVeiw()" 
+                [style.display]="fantasyStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Action category-->
+        <div class="category p-3">
+            <h4>Action Movies</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor= "rgba(23, 23, 23, 0.8)" size = "medium" color = "#E80000" type = "ball-climbing-dot" [fullScreen] = "false" 
+                name="action">
+                    <p style="color: white" > Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev"  [style.display]="actionStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext" [style.display]="actionStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="actionOptions" class="text-white" #owlAction>
+                    <ng-template carouselSlide *ngFor="let movie of actionMovies">
+                        <a routerLink="/movieDetails/movie/{{movie.id}}">
+                            <img [src]="movie.poster_path? movieImgPath + movie.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{movie.title}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{movie.vote_average}}
+                                    <i [ngClass]="movie.vote_average>5?'fas fa-star-half-alt':'far fa-star'" class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlAction.prev()" (click)="actionPrev()" [style.display]="actionStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlAction.next()" (click)="putActionDataOnVeiw()" 
+                [style.display]="fantasyStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Dramas books category-->
+        <div class="category p-3">
+            <h4>Dramas Based on Books</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor= "rgba(23, 23, 23, 0.8)" size = "medium" color = "#E80000" type = "ball-climbing-dot" [fullScreen] = "false" 
+                name="dramasBooks">
+                    <p style="color: white" > Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev"  [style.display]="dramasBooksStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext" [style.display]="dramasBooksStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="dramasBooksOptions" class="text-white" #owlDramasBooks>
+                    <ng-template carouselSlide *ngFor="let movie of dramasBooksMovies">
+                        <a routerLink="/movieDetails/movie/{{movie.id}}">
+                            <img [src]="movie.poster_path? movieImgPath + movie.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{movie.title}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{movie.vote_average}}
+                                    <i [ngClass]="movie.vote_average>5?'fas fa-star-half-alt':'far fa-star'" class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlDramasBooks.prev()" (click)="dramasBooksPrev()" [style.display]="dramasBooksStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlDramasBooks.next()" (click)="putDramasBooksDataOnVeiw()" 
+                [style.display]="dramasBooksStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Dramas real category-->
+        <div class="category p-3">
+            <h4>Dramas Based on Real Life</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor= "rgba(23, 23, 23, 0.8)" size = "medium" color = "#E80000" type = "ball-climbing-dot" [fullScreen] = "false" 
+                name="dramasReal">
+                    <p style="color: white" > Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev"  [style.display]="dramasRealStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext" [style.display]="dramasRealStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="dramasRealOptions" class="text-white" #owlDramasReal>
+                    <ng-template carouselSlide *ngFor="let movie of dramasRealMovies">
+                        <a routerLink="/movieDetails/movie/{{movie.id}}">
+                            <img [src]="movie.poster_path? movieImgPath + movie.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{movie.title}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{movie.vote_average}}
+                                    <i [ngClass]="movie.vote_average>5?'fas fa-star-half-alt':'far fa-star'" class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlDramasReal.prev()" (click)="dramasRealPrev()" [style.display]="dramasRealStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlDramasReal.next()" (click)="putDramasRealDataOnVeiw()" 
+                [style.display]="dramasRealStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Action comedies category-->
+        <div class="category p-3">
+            <h4>Action Comedies</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor= "rgba(23, 23, 23, 0.8)" size = "medium" color = "#E80000" type = "ball-climbing-dot" [fullScreen] = "false" 
+                name="actionComedies">
+                    <p style="color: white" > Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev"  [style.display]="actionComediesStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext" [style.display]="actionComediesStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="actionComediesOptions" class="text-white" #owlActionComedies>
+                    <ng-template carouselSlide *ngFor="let movie of actionComediesMovies">
+                        <a routerLink="/movieDetails/movie/{{movie.id}}">
+                            <img [src]="movie.poster_path? movieImgPath + movie.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{movie.title}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{movie.vote_average}}
+                                    <i [ngClass]="movie.vote_average>5?'fas fa-star-half-alt':'far fa-star'" class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlActionComedies.prev()" (click)="actionComediesPrev()" [style.display]="actionComediesStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlActionComedies.next()" (click)="putActionComediesDataOnVeiw()" 
+                [style.display]="actionComediesStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Dramas category-->
+        <div class="category p-3">
+            <h4>Dramas Movies</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor= "rgba(23, 23, 23, 0.8)" size = "medium" color = "#E80000" type = "ball-climbing-dot" [fullScreen] = "false" 
+                name="dramas">
+                    <p style="color: white" > Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev"  [style.display]="dramasStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext" [style.display]="dramasStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="dramasOptions" class="text-white" #owlDramas>
+                    <ng-template carouselSlide *ngFor="let movie of dramasMovies">
+                        <a routerLink="/movieDetails/movie/{{movie.id}}">
+                            <img [src]="movie.poster_path? movieImgPath + movie.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{movie.title}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{movie.vote_average}}
+                                    <i [ngClass]="movie.vote_average>5?'fas fa-star-half-alt':'far fa-star'" class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlDramas.prev()" (click)="dramasPrev()" [style.display]="dramasStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlDramas.next()" (click)="putDramasDataOnVeiw()" 
+                [style.display]="dramasStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Exciting category-->
+        <div class="category p-3">
+            <h4>Exciting Movies</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor= "rgba(23, 23, 23, 0.8)" size = "medium" color = "#E80000" type = "ball-climbing-dot" [fullScreen] = "false" 
+                name="exciting">
+                    <p style="color: white" > Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev"  [style.display]="excitingStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext" [style.display]="excitingStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="excitingOptions" class="text-white" #owlExciting>
+                    <ng-template carouselSlide *ngFor="let movie of excitingMovies">
+                        <a routerLink="/movieDetails/movie/{{movie.id}}">
+                            <img [src]="movie.poster_path? movieImgPath + movie.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{movie.title}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{movie.vote_average}}
+                                    <i [ngClass]="movie.vote_average>5?'fas fa-star-half-alt':'far fa-star'" class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlExciting.prev()" (click)="excitingPrev()" [style.display]="excitingStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlExciting.next()" (click)="putExcitingDataOnVeiw()" 
+                [style.display]="excitingStartFrom==(noOfMoviesInSlide*10*(20/noOfMoviesInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+
+    </section>
+</div>

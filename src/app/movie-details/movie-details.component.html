@@ -1,0 +1,82 @@
+<header>
+    <div class="bg col-md-11" [style.background-image]="imgPath"></div>
+    <div class="clearfix"></div>
+        <div class="header_content px-md-5">
+            <div class="container-fluid">
+                <div class="w-100">
+                    <h2 class="text-white text-left">{{movie.title}}</h2>
+                    <ul class="more_details mt-4">
+                        <li>{{dateRelease}}</li>
+                        <li>{{adultOrNo}}</li>
+                        <li>{{duration}}</li>
+                        <li><a routerLink="/movies">{{movie.genres[0].name}}</a></li>
+                    </ul>
+                    <p class="text-white col-md-9 mt-4 p-0">{{movie.overview}}</p>
+                </div>
+            </div>
+        </div>
+    <div class="all_want px-md-5">
+        <div class="container-fluid">
+            <div class="content px-4 py-2">
+                <img src="../../assets/images/siteicon.png"/>
+                <div>
+                    <p>Watch all you want.</p>
+                    <button routerLink="/signIn">Join Now</button>    
+                </div>
+            </div>
+        </div>
+    </div>    
+</header>
+<section class="more_dts px-md-5 my-5">
+    <h3 class="text-white px-3">More Details</h3>
+    <div class="row m-0">
+        <div class="genres col-lg-3 col-md-6 mt-3">
+            <div>
+                <h6>Genres</h6>
+                <div>
+                    <a routerLink="/movies" *ngFor="let gen of movie.genres">{{gen.name}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="date col-lg-3 col-md-6 mt-3">
+            <div>
+                <h6>Release Date</h6>
+                <p>{{movie.release_date}}</p>
+            </div>
+        </div>
+        <div class="countries col-lg-3 col-md-6 mt-3">
+            <div>
+                <h6>Production Countries</h6>
+                <p class="m-0" *ngFor="let country of movie.production_countries">{{country.name}}</p>
+            </div>
+        </div>
+        <div class="langs col-lg-3 col-md-6 mt-3">
+            <div>
+                <h6>Languages</h6>
+                <p class="m-0" *ngFor="let lang of movie.spoken_languages">{{lang.name}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="similar_movies px-md-5 my-5">
+    <h3 *ngIf="similarMovies.length>0" class="text-white px-3">More Originals</h3>
+    <div class="row m-0">
+        <div *ngFor="let smMovie of similarMovies" class="col-lg-3 col-6 px-3 py-2">
+            <a target="" class="d-block text-white text-decoration-none" routerLink="/movieDetails/movie/{{smMovie.id}}">
+                <img [src]="smMovie.backdrop_path?movieImgPath+smMovie.backdrop_path:defaultImg" class="img-fluid" [alt]="smMovie.title" />
+                <p class="m-0 mt-1 text-center">{{smMovie.title}}</p>
+            </a>
+        </div>
+    </div>
+</section>
+<section class="coming_soon px-md-5 my-5">
+    <h3 class="text-white px-3">Coming Soon</h3>
+    <div class="row m-0">
+        <div *ngFor="let soonMovie of soonMovies" class="col-lg-3 col-md-6 px-3 py-2">
+            <a class="text-decoration-none" target="" routerLink="/movieDetails/movie/{{soonMovie.id}}">
+                <h4 class="mt-1 text-left text-white">{{soonMovie.title}}</h4>
+                <p class="text-white">Release Date : <span>{{soonMovie.release_date}}</span></p>
+            </a>
+        </div>
+    </div>
+</section>

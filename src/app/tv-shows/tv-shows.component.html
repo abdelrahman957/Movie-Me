@@ -1,0 +1,400 @@
+<div class="container-fluid py-5">
+    <section class="head col-xl-5 col-lg-6 col-md-9 py-5">
+        <h3>Series</h3>
+        <p>Series move us like nothing else can, whether they’re scary, funny, dramatic, romantic or anywhere
+            in-between. So many titles, so much to experience.<a href="#">Watch now for free</a></p>
+    </section>
+    <section class="all_tvs">
+        <!--Crime category-->
+        <div class="category p-3">
+            <h4>Crime Series</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor="rgba(23, 23, 23, 0.8)" size="medium" color="#E80000" type="ball-climbing-dot"
+                    [fullScreen]="false" name="crime">
+                    <p style="color: white"> Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev" [style.display]="crimeStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext"
+                    [style.display]="crimeStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="crimeOptions" class="text-white" #owlCrime
+                    (initialized)="getLengthOfSlide($event)">
+                    <ng-template carouselSlide *ngFor="let tv of crimeTvs">
+                        <a routerLink="/tvDetails/tv/{{tv.id}}">
+                            <img [src]="tv.poster_path?tvImgPath + tv.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{tv.name}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{tv.vote_average}}
+                                    <i [ngClass]="tv.vote_average>5?'fas fa-star-half-alt':'far fa-star'"
+                                        class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlCrime.prev()" (click)="crimePrev()"
+                    [style.display]="crimeStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlCrime.next()" (click)="putCrimeDataOnVeiw()"
+                    [style.display]="crimeStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Action category-->
+        <div class="category p-3">
+            <h4>Action Series</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor="rgba(23, 23, 23, 0.8)" size="medium" color="#E80000" type="ball-climbing-dot"
+                    [fullScreen]="false" name="action">
+                    <p style="color: white"> Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev" [style.display]="actionStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext"
+                    [style.display]="actionStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="actionOptions" class="text-white" #owlAction
+                    (initialized)="getLengthOfSlide($event)">
+                    <ng-template carouselSlide *ngFor="let tv of actionTvs">
+                        <a routerLink="/tvDetails/tv/{{tv.id}}">
+                            <img [src]="tv.poster_path?tvImgPath + tv.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{tv.name}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{tv.vote_average}}
+                                    <i [ngClass]="tv.vote_average>5?'fas fa-star-half-alt':'far fa-star'"
+                                        class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlAction.prev()" (click)="actionPrev()"
+                    [style.display]="actionStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlAction.next()" (click)="putActionDataOnVeiw()"
+                    [style.display]="actionStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Picks category-->
+        <div class="category p-3">
+            <h4>Top Picks for You</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor="rgba(23, 23, 23, 0.8)" size="medium" color="#E80000" type="ball-climbing-dot"
+                    [fullScreen]="false" name="picks">
+                    <p style="color: white"> Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev" [style.display]="picksStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext"
+                    [style.display]="picksStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="picksOptions" class="text-white" #owlPicks
+                    (initialized)="getLengthOfSlide($event)">
+                    <ng-template carouselSlide *ngFor="let tv of picksTvs">
+                        <a routerLink="/tvDetails/tv/{{tv.id}}">
+                            <img [src]="tv.poster_path?tvImgPath + tv.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{tv.name}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{tv.vote_average}}
+                                    <i [ngClass]="tv.vote_average>5?'fas fa-star-half-alt':'far fa-star'"
+                                        class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlPicks.prev()" (click)="picksPrev()"
+                    [style.display]="picksStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlPicks.next()" (click)="putPicksDataOnVeiw()"
+                    [style.display]="picksStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Family category-->
+        <div class="category p-3">
+            <h4>Family Features</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor="rgba(23, 23, 23, 0.8)" size="medium" color="#E80000" type="ball-climbing-dot"
+                    [fullScreen]="false" name="family">
+                    <p style="color: white"> Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev" [style.display]="familyStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext"
+                    [style.display]="familyStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="familyOptions" class="text-white" #owlFamily
+                    (initialized)="getLengthOfSlide($event)">
+                    <ng-template carouselSlide *ngFor="let tv of familyTvs">
+                        <a routerLink="/tvDetails/tv/{{tv.id}}">
+                            <img [src]="tv.poster_path?tvImgPath + tv.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{tv.name}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{tv.vote_average}}
+                                    <i [ngClass]="tv.vote_average>5?'fas fa-star-half-alt':'far fa-star'"
+                                        class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlFamily.prev()" (click)="familyPrev()"
+                    [style.display]="familyStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlFamily.next()" (click)="putFamilyDataOnVeiw()"
+                    [style.display]="familyStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Mysteries category-->
+        <div class="category p-3">
+            <h4>Mysteries</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor="rgba(23, 23, 23, 0.8)" size="medium" color="#E80000" type="ball-climbing-dot"
+                    [fullScreen]="false" name="mysteries">
+                    <p style="color: white"> Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev" [style.display]="mysteriesStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext"
+                    [style.display]="mysteriesStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="mysteriesOptions" class="text-white" #owlMysteries
+                    (initialized)="getLengthOfSlide($event)">
+                    <ng-template carouselSlide *ngFor="let tv of mysteriesTvs">
+                        <a routerLink="/tvDetails/tv/{{tv.id}}">
+                            <img [src]="tv.poster_path?tvImgPath + tv.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{tv.name}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{tv.vote_average}}
+                                    <i [ngClass]="tv.vote_average>5?'fas fa-star-half-alt':'far fa-star'"
+                                        class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlMysteries.prev()" (click)="mysteriesPrev()"
+                    [style.display]="mysteriesStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlMysteries.next()" (click)="putMysteriesDataOnVeiw()"
+                    [style.display]="mysteriesStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Documentaries category-->
+        <div class="category p-3">
+            <h4>Documentaries</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor="rgba(23, 23, 23, 0.8)" size="medium" color="#E80000" type="ball-climbing-dot"
+                    [fullScreen]="false" name="documentaries">
+                    <p style="color: white"> Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev" [style.display]="documentariesStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext"
+                    [style.display]="documentariesStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="documentariesOptions" class="text-white" #owlDocumentaries
+                    (initialized)="getLengthOfSlide($event)">
+                    <ng-template carouselSlide *ngFor="let tv of documentariesTvs">
+                        <a routerLink="/tvDetails/tv/{{tv.id}}">
+                            <img [src]="tv.poster_path?tvImgPath + tv.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{tv.name}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{tv.vote_average}}
+                                    <i [ngClass]="tv.vote_average>5?'fas fa-star-half-alt':'far fa-star'"
+                                        class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlDocumentaries.prev()" (click)="documentariesPrev()"
+                    [style.display]="documentariesStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlDocumentaries.next()" (click)="putDocumentariesDataOnVeiw()"
+                    [style.display]="documentariesStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Comedies category-->
+        <div class="category p-3">
+            <h4>Comedies</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor="rgba(23, 23, 23, 0.8)" size="medium" color="#E80000" type="ball-climbing-dot"
+                    [fullScreen]="false" name="comedies">
+                    <p style="color: white"> Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev" [style.display]="comediesStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext"
+                    [style.display]="comediesStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="comediesOptions" class="text-white" #owlComedies
+                    (initialized)="getLengthOfSlide($event)">
+                    <ng-template carouselSlide *ngFor="let tv of comediesTvs">
+                        <a routerLink="/tvDetails/tv/{{tv.id}}">
+                            <img [src]="tv.poster_path?tvImgPath + tv.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{tv.name}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{tv.vote_average}}
+                                    <i [ngClass]="tv.vote_average>5?'fas fa-star-half-alt':'far fa-star'"
+                                        class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlComedies.prev()" (click)="comediesPrev()"
+                    [style.display]="comediesStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlComedies.next()" (click)="putComediesDataOnVeiw()"
+                    [style.display]="comediesStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Dramas category-->
+        <div class="category p-3">
+            <h4>Dramas</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor="rgba(23, 23, 23, 0.8)" size="medium" color="#E80000" type="ball-climbing-dot"
+                    [fullScreen]="false" name="dramas">
+                    <p style="color: white"> Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev" [style.display]="dramasStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext"
+                    [style.display]="dramasStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="dramasOptions" class="text-white" #owlDramas
+                    (initialized)="getLengthOfSlide($event)">
+                    <ng-template carouselSlide *ngFor="let tv of dramasTvs">
+                        <a routerLink="/tvDetails/tv/{{tv.id}}">
+                            <img [src]="tv.poster_path?tvImgPath + tv.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{tv.name}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{tv.vote_average}}
+                                    <i [ngClass]="tv.vote_average>5?'fas fa-star-half-alt':'far fa-star'"
+                                        class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlDramas.prev()" (click)="dramasPrev()"
+                    [style.display]="dramasStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlDramas.next()" (click)="putDramasDataOnVeiw()"
+                    [style.display]="dramasStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Exciting category-->
+        <div class="category p-3">
+            <h4>Exciting Series</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor="rgba(23, 23, 23, 0.8)" size="medium" color="#E80000" type="ball-climbing-dot"
+                    [fullScreen]="false" name="exciting">
+                    <p style="color: white"> Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev" [style.display]="excitingStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext"
+                    [style.display]="excitingStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="excitingOptions" class="text-white" #owlExciting
+                    (initialized)="getLengthOfSlide($event)">
+                    <ng-template carouselSlide *ngFor="let tv of excitingTvs">
+                        <a routerLink="/tvDetails/tv/{{tv.id}}">
+                            <img [src]="tv.poster_path?tvImgPath + tv.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{tv.name}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{tv.vote_average}}
+                                    <i [ngClass]="tv.vote_average>5?'fas fa-star-half-alt':'far fa-star'"
+                                        class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlExciting.prev()" (click)="excitingPrev()"
+                    [style.display]="excitingStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlExciting.next()" (click)="putExcitingDataOnVeiw()"
+                    [style.display]="excitingStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <!--Romantic category-->
+        <div class="category p-3">
+            <h4>Romantic Series</h4>
+            <div class="position-relative">
+                <ngx-spinner bdColor="rgba(23, 23, 23, 0.8)" size="medium" color="#E80000" type="ball-climbing-dot"
+                    [fullScreen]="false" name="romantic">
+                    <p style="color: white"> Loading... </p>
+                </ngx-spinner>
+                <div class="overlayPrev" [style.display]="romanticStartFrom==0?'none':'block'"></div>
+                <div class="overlayNext"
+                    [style.display]="romanticStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'"></div>
+                <owl-carousel-o [options]="romanticOptions" class="text-white" #owlRomantic
+                    (initialized)="getLengthOfSlide($event)">
+                    <ng-template carouselSlide *ngFor="let tv of romanticTvs">
+                        <a routerLink="/tvDetails/tv/{{tv.id}}">
+                            <img [src]="tv.poster_path?tvImgPath + tv.poster_path:defaultPoster" />
+                            <h5 class="text-center mt-2 p-2">{{tv.name}}</h5>
+                            <div class="rate">
+                                <p>
+                                    {{tv.vote_average}}
+                                    <i [ngClass]="tv.vote_average>5?'fas fa-star-half-alt':'far fa-star'"
+                                        class="ml-2"></i>
+                                </p>
+                            </div>
+                        </a>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+            <div>
+                <a class="owl-prev" (click)="owlRomantic.prev()" (click)="romanticPrev()"
+                    [style.display]="romanticStartFrom==0?'none':'block'">
+                    <i class="fas fa-angle-left fa-2x"></i>
+                </a>
+                <a class="owl-next" (click)="owlRomantic.next()" (click)="putRomanticDataOnVeiw()"
+                    [style.display]="romanticStartFrom==(noOfTvsInSlide*10*(20/noOfTvsInSlide))?'none':'block'">
+                    <i class="fas fa-angle-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+
+    </section>
+</div>

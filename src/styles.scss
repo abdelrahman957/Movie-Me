@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+$mainColor:#181818;
+$secondColor:#E80000;
+$thirdColor:#B60002;
+$seperateBorder: 8px solid #333;
+$mainFont:'Netflix Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+*::selection{background-color: $secondColor;}
+body{
+    background-color: #181818;
+}
+//-------------------------movies page------
+.owl-carousel .owl-stage{
+    padding-left: 0 !important;
+}
+.owl-carousel .owl-item{
+    cursor: pointer;
+    position: relative;
+}

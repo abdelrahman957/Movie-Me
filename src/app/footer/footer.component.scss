@@ -1,0 +1,47 @@
+@import '../../styles.scss';
+$footerMainColor:#999999;
+footer{
+    .content{
+        .contact_us{
+            a{
+                color:$footerMainColor;
+            }
+        }
+        .links{
+            li{
+                a{
+                    color: $footerMainColor;
+                    font-size: 13px;
+                }
+            }
+        }
+        .lang{
+            color: $footerMainColor;
+            div{
+                width: fit-content;
+                span{
+                    border: 1px solid #333;
+                    border-radius: 5px;
+                    cursor: default;
+                }
+                ul{
+                    list-style: none;
+                    border:1px solid #333;
+                    border-top: none;
+                    padding: 0;
+                    display: none;
+                    li{
+                        padding-left: 5px;
+                        cursor: default;
+                        text-align: center;
+                        transition: all 0.2s;
+                        &:hover{
+                            background-color: $secondColor;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

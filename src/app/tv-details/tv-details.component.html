@@ -1,0 +1,103 @@
+<header>
+    <div class="bg col-md-11" [style.background-image]="imgPath"></div>
+    <div class="clearfix"></div>
+        <div class="header_content px-md-5">
+            <div class="container-fluid">
+                <div class="w-100">
+                    <h2 class="text-white text-left">{{tv.name}}</h2>
+                    <ul class="more_details mt-4">
+                        <li>{{dateRelease}}</li>
+                        <li>{{tv.seasons.length}} Seasons</li>
+                        <li>{{duration}}</li>
+                        <li><a routerLink="/movies">{{tv.genres[0].name}}</a></li>
+                    </ul>
+                    <p class="text-white col-md-9 mt-4 p-0">{{tv.overview}}</p>
+                </div>
+            </div>
+        </div>
+    <div class="all_want px-md-5">
+        <div class="container-fluid">
+            <div class="content px-4 py-2">
+                <img src="../../assets/images/siteicon.png"/>
+                <div>
+                    <p>Watch all you want.</p>
+                    <button routerLink="/signIn">Join Now</button>    
+                </div>
+            </div>
+        </div>
+    </div>    
+</header>
+<section class="seasons px-md-5 my-5">
+    <div class="px-3">
+        <h4 class="text-white">Episodes | {{tv.name}}</h4>
+        <select class="my-3" [(ngModel)]="seasonNo" (change)="changeSeason()">
+            <option *ngFor="let No of seasonsNos" [value]="tv.seasons[No].season_number">Season {{No+1}}</option>
+        </select>
+        <h5 class="text-white">Release year: {{seasonDate}}</h5>
+        <p class="col-md-8 p-0">{{tvSeason.overview}}</p>
+    </div>
+    <div class="row m-0">
+        <div *ngFor="let episode of seasonEpisodes" class="col-lg-3 col-6 px-3 py-2">
+            <a class="d-block text-white text-decoration-none">
+                <img [src]="episode.still_path?tvImgPath+episode.still_path:defaultImg" class="img-fluid" [alt]="episode.name" />
+                <h6 class="mt-2">{{episode.episode_number}}. {{episode.name}}
+                    <span class="float-right">{{duration}}</span>
+                </h6>
+                <p class="m-0 mt-1">{{episode.overview}}</p>
+            </a>
+        </div>
+    </div>
+</section>
+<section class="more_dts px-md-5 my-5">
+    <h3 class="text-white px-3">More Details</h3>
+    <div class="row m-0">
+        <div class="genres col-lg-3 col-md-6 mt-3">
+            <div>
+                <h6>Genres</h6>
+                <div>
+                    <a routerLink="/tvShows" *ngFor="let gen of tv.genres">{{gen.name}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="date col-lg-3 col-md-6 mt-3">
+            <div>
+                <h6>Created By</h6>
+                <p class="m-0" *ngFor="let creater of tv.created_by">{{creater.name}}</p>
+            </div>
+        </div>
+        <div class="countries col-lg-3 col-md-6 mt-3">
+            <div>
+                <h6>Production Countries</h6>
+                <p class="m-0" *ngFor="let country of tv.origin_country">{{country}}</p>
+            </div>
+        </div>
+        <div class="langs col-lg-3 col-md-6 mt-3">
+            <div>
+                <h6>Languages</h6>
+                <p class="m-0" *ngFor="let lang of tv.languages">{{lang}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="similar_tvs px-md-5 my-5">
+    <h3 *ngIf="similarTvs.length>0" class="text-white px-3">More Series</h3>
+    <div class="row m-0">
+        <div *ngFor="let smTv of similarTvs" class="col-lg-3 col-6 px-3 py-2">
+            <a target="" class="d-block text-white text-decoration-none" routerLink="/tvDetails/tv/{{smTv.id}}">
+                <img [src]="smTv.backdrop_path?tvImgPath+smTv.backdrop_path:defaultImg" class="img-fluid" [alt]="smTv.title" />
+                <p class="m-0 mt-1 text-center">{{smTv.name}}</p>
+            </a>
+        </div>
+    </div>
+</section> 
+<section class="coming_soon px-md-5 my-5">
+    <h3 class="text-white px-3">Coming Soon</h3>
+    <div class="row m-0">
+        <div *ngFor="let soonMovie of soonTvs" class="col-lg-3 col-md-6 px-3 py-2">
+            <a class="text-decoration-none" target="" routerLink="/movieDetails/movie/{{soonMovie.id}}">
+                <h4 class="mt-1 text-left text-white">{{soonMovie.title}}</h4>
+                <p class="text-white">Release Date : <span>{{soonMovie.release_date}}</span></p>
+            </a>
+        </div>
+    </div>
+</section>

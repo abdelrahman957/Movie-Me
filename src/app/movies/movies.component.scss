@@ -1,0 +1,98 @@
+@import '../../styles.scss';
+h3,p{
+    font-family:$mainFont ;
+}
+.head{
+    color: #fff;
+    h3{ 
+        font:
+        {   
+            size: 50px;
+            weight:bold;
+        }
+    }
+    p{
+        font-size: 16px;
+        font-weight: bold;
+        a{
+            color: #fff;
+            text-decoration: underline;
+        }
+    }
+}
+.all_movies .category{
+    position: relative;
+    min-height: 550px;
+    h4{
+        color: #fff;
+        margin-bottom: 20px;
+        font: 
+        {
+            weight:normal;
+            size:22px;
+        };
+    }
+    .overlayPrev{
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 30px;
+        background:linear-gradient(to right,$mainColor,transparent 100%) ;
+        z-index: 9;
+    }
+    .overlayNext{
+        @extend .overlayPrev;
+        right: 0;
+        left: auto;
+        background:linear-gradient(to left,$mainColor,transparent 100%) ;
+    }
+    a{
+        text-decoration: none;
+        color: #fff;
+        .rate{
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: $thirdColor;
+            padding: 7px;
+            min-width: 40px;
+            min-height: 40px;
+            text-align: center;
+            border-bottom-right-radius:10px ;
+            p{
+                margin: 0;
+            }
+        }
+        img{
+            max-height: 400px;
+            max-width: 300px;
+        }    
+    }
+    .owl-prev{
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%,-100%);
+        left: 0;
+        background-color: transparent !important;
+        color: #E80000 !important;
+        cursor: pointer;
+        z-index: 99;
+    }
+    .owl-next{
+        @extend .owl-prev;
+        transform: translate(50%,-100%);
+        right: 0;
+        left: auto;
+    }
+}
+//------------------ media queries ---------------
+@media screen and(max-width:576px) {
+    .all_movies .category{
+        min-height: 450px;
+        h5{
+            font-size: 15px;
+        }
+    }    
+
+}
