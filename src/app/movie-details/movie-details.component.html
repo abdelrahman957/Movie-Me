@@ -62,7 +62,7 @@
     <h3 *ngIf="similarMovies.length>0" class="text-white px-3">More Originals</h3>
     <div class="row m-0">
         <div *ngFor="let smMovie of similarMovies" class="col-lg-3 col-6 px-3 py-2">
-            <a target="" class="d-block text-white text-decoration-none" routerLink="/movieDetails/movie/{{smMovie.id}}">
+            <a target=""  class="d-block text-white text-decoration-none" routerLink="/movieDetails/movie/{{smMovie.id}}">
                 <img [src]="smMovie.backdrop_path?movieImgPath+smMovie.backdrop_path:defaultImg" class="img-fluid" [alt]="smMovie.title" />
                 <p class="m-0 mt-1 text-center">{{smMovie.title}}</p>
             </a>

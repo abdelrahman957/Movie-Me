@@ -9,7 +9,7 @@ import { TvDetailsComponent } from './tv-details/tv-details.component';
 import { TvShowsComponent } from './tv-shows/tv-shows.component';
 
 const routes: Routes = [
-  {path:'',redirectTo:'home',pathMatch:'full'},
+  {path:'',redirectTo:'movies',pathMatch:'full'},
   {path:'home',component:HomeComponent},
   {path:'movies',component:MoviesComponent},
   {path:'tvShows',component:TvShowsComponent},
